@@ -4,7 +4,7 @@ import (
 	login "github.com/zhangshuai268/spg-go-pkg/service/wx/login/v1"
 )
 
-type Client interface {
+type clientService interface {
 	WxLogin(param interface{}) (login.LoginService, error)
 }
 
@@ -19,7 +19,7 @@ func (c *client) WxLogin(param interface{}) (login.LoginService, error) {
 	return newLogin, nil
 }
 
-func NewClient() (Client, error) {
+func newClient() (clientService, error) {
 	var c *client
 	return c, nil
 }

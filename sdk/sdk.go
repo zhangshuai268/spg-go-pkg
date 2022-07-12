@@ -1,15 +1,15 @@
 package sdk
 
-type Sdk struct {
-	client Client
+type sdk struct {
+	Client clientService
 }
 
-func NewSdk() (*Sdk, error) {
-	c, err := NewClient()
+func NewSdk() (*sdk, error) {
+	c, err := newClient()
 	if err != nil {
 		return nil, err
 	}
-	return &Sdk{
-		client: c,
+	return &sdk{
+		Client: c,
 	}, nil
 }
