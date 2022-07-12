@@ -1,6 +1,6 @@
 package v1
 
-import "spg-go-pkg/pkg"
+import "github.com/zhangshuai268/spg-go-pkg/pkg"
 
 type JsCode2Response struct {
 	OpenId     string `json:"openid"`

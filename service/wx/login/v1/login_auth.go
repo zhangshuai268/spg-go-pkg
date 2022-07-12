@@ -1,7 +1,7 @@
 package v1
 
 import (
-	"spg-go-pkg/pkg"
+	"github.com/zhangshuai268/spg-go-pkg/pkg"
 )
 
 type AuthResponse struct {
