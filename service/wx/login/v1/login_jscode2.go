@@ -17,10 +17,10 @@ func (l *login) JsCode2(code string) (*JsCode2Response, error) {
 		return nil, err
 	}
 	//处理返回值
-	var res *JsCode2Response
-	err = pkg.StructTo(&wxData, res)
+	var res JsCode2Response
+	err = pkg.StructTo(&wxData, &res)
 	if err != nil {
 		return nil, err
 	}
-	return res, nil
+	return &res, nil
 }

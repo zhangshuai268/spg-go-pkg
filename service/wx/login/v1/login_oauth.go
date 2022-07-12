@@ -22,10 +22,10 @@ func (l *login) Oauth(code string) (*OauthResponse, error) {
 		return nil, err
 	}
 	//处理返回值
-	var res *OauthResponse
-	err = pkg.StructTo(&wxData, res)
+	var res OauthResponse
+	err = pkg.StructTo(&wxData, &res)
 	if err != nil {
 		return nil, err
 	}
-	return res, nil
+	return &res, nil
 }

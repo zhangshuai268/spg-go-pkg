@@ -26,10 +26,10 @@ func (l *login) UserInfo(accessToken, openId, lang string) (*UserInfoResponse, e
 		return nil, err
 	}
 	//处理返回值
-	var res *UserInfoResponse
-	err = pkg.StructTo(&wxData, res)
+	var res UserInfoResponse
+	err = pkg.StructTo(&wxData, &res)
 	if err != nil {
 		return nil, err
 	}
-	return res, nil
+	return &res, nil
 }

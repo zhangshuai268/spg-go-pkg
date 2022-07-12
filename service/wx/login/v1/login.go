@@ -28,8 +28,8 @@ type login struct {
 }
 
 func NewLogin(param interface{}) (LoginService, error) {
-	var l *login
-	err := pkg.StructTo(&param, l)
+	var l login
+	err := pkg.StructTo(&param, &l)
 	if err != nil {
 		return nil, err
 	}
@@ -42,5 +42,5 @@ func NewLogin(param interface{}) (LoginService, error) {
 	if l.GrantType == "" {
 		l.GrantType = grantType
 	}
-	return l, nil
+	return &l, nil
 }

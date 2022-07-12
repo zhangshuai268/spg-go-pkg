@@ -16,10 +16,10 @@ func (l *login) Auth(accessToken, openId string) (*AuthResponse, error) {
 		return nil, err
 	}
 	//处理返回值
-	var res *AuthResponse
-	err = pkg.StructTo(&wxData, res)
+	var res AuthResponse
+	err = pkg.StructTo(&wxData, &res)
 	if err != nil {
 		return nil, err
 	}
-	return res, nil
+	return &res, nil
 }

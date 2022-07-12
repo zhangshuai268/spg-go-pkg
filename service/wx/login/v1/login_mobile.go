@@ -22,12 +22,12 @@ func (l *login) Mobile(mobile, iv, sessionKey string) (*MobileResponse, error) {
 	if err != nil {
 		return nil, err
 	}
-	var res *MobileResponse
-	err = pkg.StructTo(s, res)
+	var res MobileResponse
+	err = pkg.StructTo(s, &res)
 	if err != nil {
 		return nil, err
 	}
-	return res, nil
+	return &res, nil
 }
 
 func dncrypt(rawData, iv, key string) ([]byte, error) {
