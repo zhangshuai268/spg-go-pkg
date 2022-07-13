@@ -17,7 +17,7 @@ type OauthResponse struct {
 
 func (l *login) Oauth(code string) (*OauthResponse, error) {
 	//请求链接
-	url := oauthUrl + "appid=" + l.Appid + "&secret=" + l.AppSecret + "&code=" + code + "&grant_type=" + l.GrantType
+	url := oauthUrl + "appid=" + l.AppId + "&secret=" + l.AppSecret + "&code=" + code + "&grant_type=" + l.GrantType
 	wxData, err := util.HttpGet(url)
 	if err != nil {
 		return nil, err

@@ -14,7 +14,7 @@ type JsCode2Response struct {
 }
 
 func (l *login) JsCode2(code string) (*JsCode2Response, error) {
-	url := jscode2Url + "appid=" + l.Appid + "&secret=" + l.AppSecret + "&js_code=" + code + "&grant_type=" + l.GrantType
+	url := jscode2Url + "appid=" + l.AppId + "&secret=" + l.AppSecret + "&js_code=" + code + "&grant_type=" + l.GrantType
 	wxData, err := util.HttpGet(url)
 	if err != nil {
 		return nil, err

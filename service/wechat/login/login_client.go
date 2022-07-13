@@ -9,7 +9,9 @@ const (
 	userinfoUrl = "https://api.weixin.qq.com/sns/userinfo?"            //获取用户信息
 	authUrl     = "https://api.weixin.qq.com/sns/auth?"                //access_token有效期
 	jscode2Url  = "https://api.weixin.qq.com/sns/jscode2session?"      //微信小程序授权登录
-	grantType   = "authorization_code"                                 //grantType
+	tokenUrl    = "https://api.weixin.qq.com/cgi-bin/token?"           //微信获取接口调用凭证
+	grantTypeA  = "authorization_code"                                 //grantTypeA
+	grantTypeC  = "client_credential"                                  //grantTypeC
 )
 
 type LoginService interface {
@@ -23,10 +25,12 @@ type LoginService interface {
 	JsCode2(code string) (*JsCode2Response, error)
 	// Mobile 授权手机号
 	Mobile(mobile, iv, sessionKey string) (*MobileResponse, error)
+	// GetAccessToken 获取接口调用凭证access_token,与登录模块不同
+	GetAccessToken() (*AccessTokenResponse, error)
 }
 
 type login struct {
-	Appid     string `json:"app_id"`
+	AppId     string `json:"app_id"`
 	AppSecret string `json:"app_secret"`
 	GrantType string `json:"grant_type"`
 }
@@ -40,8 +44,8 @@ func NewLoginClient(appId, appSecret string) (LoginService, error) {
 		return nil, errors.New("缺少app_secret")
 	}
 	return &login{
-		Appid:     appId,
+		AppId:     appId,
 		AppSecret: appSecret,
-		GrantType: grantType,
+		GrantType: grantTypeA,
 	}, nil
 }
