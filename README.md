@@ -5,7 +5,7 @@
 
 ## 项目下载
 
-`github.com/zhangshuai268/spg-go-pkg`
+`go get github.com/zhangshuai268/spg-go-pkg`
 
 ## 项目模块使用
 
