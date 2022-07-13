@@ -10,10 +10,10 @@ import (
 var (
 	client      MessageService
 	clientJs    MessageService
-	appId       = "wxd85b4cd83dba5acc"
-	appSecret   = "fbae05ceb4a973152bf94ba710a50f6c"
-	appIdJs     = "wx091994d55c96a515"
-	appSecretJs = "aa8807942087152a94671682bf6ff1eb"
+	appId       = ""
+	appSecret   = ""
+	appIdJs     = ""
+	appSecretJs = ""
 )
 
 func TestMain(m *testing.M) {
