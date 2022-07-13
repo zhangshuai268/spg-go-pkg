@@ -1,19 +1,20 @@
-package v1
+package wechat
 
 import (
 	"crypto/aes"
 	"crypto/cipher"
 	"encoding/base64"
-	"github.com/zhangshuai268/spg-go-pkg/pkg"
+	"github.com/zhangshuai268/spg-go-pkg/pkg/util"
 )
 
+// MobileResponse 手机号解析Rsp
 type MobileResponse struct {
 	PhoneNumber     string `json:"phoneNumber"`
 	PurePhoneNumber string `json:"purePhoneNumber"`
 	CountryCode     string `json:"countryCode"`
 	WaterMark       struct {
 		AppId     string `json:"appid"`
-		TimeStamp string `json:"timestamp"`
+		TimeStamp int    `json:"timestamp"`
 	} `json:"watermark"`
 }
 
@@ -23,32 +24,32 @@ func (l *login) Mobile(mobile, iv, sessionKey string) (*MobileResponse, error) {
 		return nil, err
 	}
 	var res MobileResponse
-	err = pkg.StructTo(s, &res)
+	err = util.StructTo(s, &res)
 	if err != nil {
 		return nil, err
 	}
 	return &res, nil
 }
 
-func dncrypt(rawData, iv, key string) ([]byte, error) {
+func dncrypt(rawData, iv, key string) (string, error) {
 	data, err := base64.StdEncoding.DecodeString(rawData)
 	if err != nil {
-		return nil, err
+		return "", err
 	}
 	key_b, err := base64.StdEncoding.DecodeString(key)
 	if err != nil {
-		return nil, err
+		return "", err
 	}
 	iv_b, err := base64.StdEncoding.DecodeString(iv)
 	if err != nil {
-		return nil, err
+		return "", err
 	}
 
 	dnData, err := aesCBCDncrypt(data, key_b, iv_b)
 	if err != nil {
-		return nil, err
+		return "", err
 	}
-	return dnData, nil
+	return string(dnData), nil
 }
 
 // 解密

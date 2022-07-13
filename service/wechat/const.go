@@ -1,4 +1,4 @@
-package login
+package wechat
 
 const (
 	LandCN = "zh_CN" //简体

@@ -1,9 +1,10 @@
-package v1
+package wechat
 
 import (
-	"github.com/zhangshuai268/spg-go-pkg/pkg"
+	"github.com/zhangshuai268/spg-go-pkg/pkg/util"
 )
 
+// UserInfoResponse 获取用户详情Rsp
 type UserInfoResponse struct {
 	OpenId     string   `json:"openid"`
 	NickName   string   `json:"nickname"`
@@ -21,13 +22,13 @@ type UserInfoResponse struct {
 func (l *login) UserInfo(accessToken, openId, lang string) (*UserInfoResponse, error) {
 	//请求链接
 	url := userinfoUrl + "access_token=" + accessToken + "&openid=" + openId + "&lang=" + lang
-	wxData, err := pkg.HttpGet(url)
+	wxData, err := util.HttpGet(url)
 	if err != nil {
 		return nil, err
 	}
 	//处理返回值
 	var res UserInfoResponse
-	err = pkg.StructTo(&wxData, &res)
+	err = util.StructTo(&wxData, &res)
 	if err != nil {
 		return nil, err
 	}
