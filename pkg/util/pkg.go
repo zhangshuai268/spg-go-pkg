@@ -1,6 +1,7 @@
 package util
 
 import (
+	"bytes"
 	"encoding/json"
 	"io/ioutil"
 	"net/http"
@@ -45,6 +46,28 @@ func StructTo(old interface{}, new interface{}) error {
 func HttpGet(url string) (map[string]interface{}, error) {
 	var data map[string]interface{}
 	res, err := http.Get(url)
+	if err != nil {
+		return nil, err
+	}
+	body, err := ioutil.ReadAll(res.Body)
+	err = json.Unmarshal(body, &data)
+	if err != nil {
+		return nil, err
+	}
+	return data, nil
+}
+
+/**
+ * post请求通过json
+ * @author zhangshuai
+ * @description //TODO
+ * @date 10:26 2021/4/19
+ * @param
+ * @return
+ **/
+func HttpPostJson(url string, post []byte) (map[string]interface{}, error) {
+	var data map[string]interface{}
+	res, err := http.Post(url, "application/json", bytes.NewReader(post))
 	if err != nil {
 		return nil, err
 	}

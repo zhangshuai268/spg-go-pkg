@@ -6,7 +6,7 @@ import (
 )
 
 func TestLogin_Oauth(t *testing.T) {
-	code := "083lBDkl2Og5w94Ttyol25QyZh2lBDka"
+	code := "043CKLll2n47v94491pl2nVIsi3CKLlr"
 	oauth, err := client.Oauth(code)
 	if err != nil {
 		logger.Logger.Info(err.Error())

@@ -6,7 +6,7 @@ import (
 )
 
 func TestLogin_JsCode2(t *testing.T) {
-	code := "083lBDkl2Og5w94Ttyol25QyZh2lBDka"
+	code := "043CKLll2n47v94491pl2nVIsi3CKLlr"
 	res, err := clientJs.JsCode2(code)
 	if err != nil {
 		logger.Logger.Error(err.Error())
