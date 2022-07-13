@@ -13,6 +13,22 @@
 
 #### 1.微信授权登录
 
-````
+##### 使用方法
 
 ````
+package
+
+import 	wechat "github.com/zhangshuai268/spg-go-pkg/service/wechat/login"
+
+func main() {
+
+    //初始化微信授权client
+    client, err := wechat.NewLoginClient("appid", "appsecet")
+
+
+}
+
+````
+##### 接口目录
+
+* [完成接口文档](./doc/wechat/login.md)
