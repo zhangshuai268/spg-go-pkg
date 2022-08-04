@@ -19,6 +19,9 @@ type logger struct {
 	api    *logrus.Logger
 }
 
+// InitLogger 初始化日志
+//  onFile: 文件记录开关
+//  注意: 若文件记录开关打开则必须存在日志记录文件夹log
 func InitLogger(onFile bool) (*logger, error) {
 	dir, _ := os.Getwd()
 	var apiLogger *logrus.Logger
@@ -115,6 +118,7 @@ func (logger *logger) SetApiFile(reqUri string) error {
 	return nil
 }
 
+// Error 错误类型记录
 func (logger *logger) Error(err ...interface{}) {
 	_, file, line, _ := runtime.Caller(1)
 	if logger.OnFile {
@@ -123,6 +127,7 @@ func (logger *logger) Error(err ...interface{}) {
 	fmt.Println(err, file, line)
 }
 
+// Api 接口调用类型记录
 func (logger *logger) Api(err ...interface{}) {
 	if logger.OnFile {
 		Logger.api.Infoln(err)
@@ -130,6 +135,7 @@ func (logger *logger) Api(err ...interface{}) {
 	fmt.Println(err)
 }
 
+// Panic 异常类型记录
 func (logger *logger) Panic(err ...interface{}) {
 	_, file, line, _ := runtime.Caller(4)
 	if logger.OnFile {
@@ -138,6 +144,7 @@ func (logger *logger) Panic(err ...interface{}) {
 	fmt.Println(err, file, line)
 }
 
+// Info 自定义记录
 func (logger *logger) Info(err ...interface{}) {
 	_, file, line, _ := runtime.Caller(1)
 	if logger.OnFile {
