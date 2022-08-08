@@ -17,7 +17,7 @@
 
 #### 微信获取调用接口凭证
 
->使用方法，参考spg-go-pkg/service/wechat/message/login_token_test.go
+>使用方法，参考spg-go-pkg/service/wechat/message/message_token_test.go
 
 >微信接口调用凭证的获取每日有次数限制，建议获取后储存方便下次使用，并在过期后及时更新 
 
@@ -27,7 +27,7 @@ token, err := client.GetAccessToken()
 
 #### 微信订阅消息发送
 
->使用方法，参考spg-go-pkg/service/wechat/message/login_subscribe_send_test.go
+>使用方法，参考spg-go-pkg/service/wechat/message/message_subscribe_send_test.go
 
 >公众号文档地址: https://developers.weixin.qq.com/doc/offiaccount/Message_Management/One-time_subscription_info.html  
 >小程序文档地址: https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/subscribe-message/subscribeMessage.send.html  
@@ -52,7 +52,7 @@ send, err := client.SubscribeSend(pm, accessTokenJs.AccessToken)
 
 #### 微信模板消息发送
 
->使用方法，参考spg-go-pkg/service/wechat/message/login_template_send_test.go
+>使用方法，参考spg-go-pkg/service/wechat/message/message_template_send_test.go
 
 >文档地址: https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Template_Message_Interface.html
 
@@ -82,7 +82,7 @@ send, err := client.TemplateSend(pm, accessToken.AccessToken)
 
 #### 微信获取模板消息id
 
->使用方法，参考spg-go-pkg/service/wechat/message/login_template_id_test.go
+>使用方法，参考spg-go-pkg/service/wechat/message/message_template_id_test.go
 
 >文档地址: https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Template_Message_Interface.html#2
 
