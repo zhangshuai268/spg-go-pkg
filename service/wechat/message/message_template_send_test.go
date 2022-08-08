@@ -7,7 +7,7 @@ import (
 )
 
 func TestMessage_TemplateSend(t *testing.T) {
-	accessToken := ""
+	accessToken, _ := client.GetAccessToken()
 	pm := make(spg_go_pkg.ParamMap)
 	pm.Set("touser", "")
 	pm.Set("template_id", "")
@@ -27,7 +27,7 @@ func TestMessage_TemplateSend(t *testing.T) {
 			"color": "#173177",
 		},
 	})
-	send, err := client.TemplateSend(pm, accessToken)
+	send, err := client.TemplateSend(pm, accessToken.AccessToken)
 	if err != nil {
 		logger.Logger.Error(err.Error())
 		return

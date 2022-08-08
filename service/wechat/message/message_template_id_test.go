@@ -7,10 +7,10 @@ import (
 )
 
 func TestMessage_TemplateId(t *testing.T) {
-	accessToken := ""
+	accessToken, _ := client.GetAccessToken()
 	pm := make(spg_go_pkg.ParamMap)
 	pm.Set("template_id_short", "TM00015")
-	id, err := client.TemplateId(pm, accessToken)
+	id, err := client.TemplateId(pm, accessToken.AccessToken)
 	if err != nil {
 		logger.Logger.Error(err.Error())
 		return
