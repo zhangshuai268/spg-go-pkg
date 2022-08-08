@@ -11,8 +11,8 @@
 * [`client.Oauth(code string)` 网页授权登录](#网页授权登录)
 * [`client.UserInfo(accessToken, openId, lang string)` 获取用户信息](#获取用户信息)
 * [`client.JsCode2(code string)` 小程序授权登录](#小程序授权登录)
-* `client.Auth(access_token, open_id string)` access_token有效期判断
-* `client.Mobile(mobile, iv, sessionKey string)` 手机号解密
+* [`client.Auth(access_token, open_id string)` access_token有效期判断](#token有效期判断)
+* [`client.Mobile(mobile, iv, sessionKey string)` 手机号解密](#手机号解密)
 
 ### 使用方法
 
@@ -42,4 +42,25 @@ info, err := client.UserInfo(accessToken, openId, wechat.LandCN)
 ````
 code := "043CKLll2n47v94491pl2nVIsi3CKLlr"
 res, err := clientJs.JsCode2(code)
+````
+
+#### token有效期判断
+
+>使用方法，参考spg-go-pkg/service/wechat/login/login_auth_test.go
+
+````
+openId := ""
+accessToken := ""
+auth, err := client.Auth(accessToken, openId)
+````
+
+#### 手机号解密
+
+>使用方法，参考spg-go-pkg/service/wechat/login/login_mobile_test.go
+
+````
+mobile := "Kf3TdPbzEmhWMuPKtlKxIWDkijhn402w1bxoHL4kLdcKr6jT1jNcIhvDJfjXmJcgDWLjmBiIGJ5acUuSvxLws3WgAkERmtTuiCG10CKLsJiR+AXVk7B2TUQzsq88YVilDz/YAN3647REE7glGmeBPfvUmdbfDzhL9BzvEiuRhABuCYyTMz4iaM8hFjbLB1caaeoOlykYAFMWC5pZi9P8uw=="
+iv := "Cds8j3VYoGvnTp1BrjXdJg=="
+session := "lyY4HPQbaOYzZdG+JcYK9w=="
+res, err := client.Mobile(mobile, iv, session)
 ````
