@@ -104,3 +104,29 @@ func main() {
 ##### 接口目录
 
 * [完成接口文档](./doc/aliyun/sms.md)
+
+#### 2.支付宝支付
+
+##### 使用方法
+
+
+````
+package
+
+import (
+    "github.com/zhangshuai268/spg-go-pkg/service/aliyun"
+    aliyun_pay "github.com/zhangshuai268/spg-go-pkg/service/aliyun/pay"
+)
+
+func main() {
+    
+    //aliyun.TradeTypeApp: APP支付
+    //aliyun.TradeTypeWeb: 手机网站支付
+    //aliyun.TradeTypeH5:  电脑网站支付
+    aliyun_sms.NewPayClient("appId", "privateKey", "publicKey", aliyun.TradeTypeApp, isProd)
+}
+````
+
+##### 接口目录
+
+* [完成接口文档](./doc/aliyun/pay.md)

@@ -24,7 +24,7 @@ type PayService interface {
 	//  文档地址：https://opendocs.alipay.com/open/02e7go
 	PayRefund(pm spg_go_pkg.ParamMap) (*PayRefundResponse, error)
 	// PayOrderSearch 订单查询接口
-	//  文档地址：https://pay.weixin.qq.com/wiki/doc/api/wxpay_v2/open/chapter3_2.shtml
+	//  文档地址：https://opendocs.alipay.com/open/02e7gm
 	PayOrderSearch(pm spg_go_pkg.ParamMap) (*PayOrderResponse, error)
 }
 

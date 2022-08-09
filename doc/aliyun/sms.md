@@ -10,6 +10,40 @@
 
 ### 短信发送 API
 
-* `client.SmsSend()` 短信发送
-* `client.SmsSendStatic()` 查询短信发送统计信息
-* `client.SmsSendDetail()` 查询短信发送详情
+* [`client.SmsSend()` 短信发送](#短信发送)
+* [`client.SmsSendStatic()` 查询短信发送统计信息](#查询短信发送统计信息)
+* [`client.SmsSendDetail()` 查询短信发送详情](#查询短信发送详情)
+
+### 使用方法
+
+#### 短信发送
+
+>使用方法，参考spg-go-pkg/service/wechat/sms/sms_send_test.go
+
+>文档地址: https://help.aliyun.com/document_detail/419273.html
+
+````
+content := `{"code":"999999"}`
+send, err := client.SmsSend("173****1241", content)
+````
+
+#### 查询短信发送统计信息
+
+>使用方法，参考spg-go-pkg/service/wechat/sms/sms_static_test.go
+
+>文档地址: https://help.aliyun.com/document_detail/419276.html
+
+````
+//GlobalIn:国内 GlobalOut:国外或港澳台
+static, err := client.SmsSendStatic(aliyun.GlobalIn, "20220804", "20220804", 1, 10)
+````
+
+#### 查询短信发送详情
+
+>使用方法，参考spg-go-pkg/service/wechat/sms/sms_detail_test.go
+
+>文档地址: https://help.aliyun.com/document_detail/419277.html
+
+````
+res, err := client.SmsSendDetail("123****2313", "20200801", 10, 1)
+````

@@ -29,6 +29,9 @@ func (p *pay) PayRefund(pm spg_go_pkg.ParamMap) (*PayRefundResponse, spg_go_pkg.
 		return nil, nil, err
 	}
 	client.SetCountry(gopay_wechat.China)
+	//生成签名
+	sign := gopay_wechat.GetParamSign(p.AppId, p.MchId, p.PaySecret, bm)
+	bm.Set("sign", sign)
 	wxRsp, resBm, err := client.Refund(context.Background(), bm)
 	if err != nil {
 		return nil, nil, err

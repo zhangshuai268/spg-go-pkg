@@ -20,6 +20,9 @@ func (p *pay) PayOrderSearch(pm spg_go_pkg.ParamMap) (*PayOrderResponse, spg_go_
 		return nil, nil, err
 	}
 	client := gopay_wechat.NewClient(p.AppId, p.MchId, p.PaySecret, true)
+	//支付签名
+	sign := gopay_wechat.GetParamSign(p.AppId, p.MchId, p.PaySecret, bm)
+	bm.Set("sign", sign)
 	wxRsp, resBm, err := client.QueryOrder(context.TODO(), bm)
 	if err != nil {
 		return nil, nil, nil

@@ -14,17 +14,17 @@
 
 * [`client.PayUnifiedOrder()` 微信下单](#微信下单)
 * [`client.PaySign()`         微信签名生成](#微信签名生成)
-* [`client.PayParseNotifyToBodyMap()` 异步通知参数处理](#异步通知参数处理)
-* [`client.PayVerifySign()` 验证签名](#验证签名)
-* [`client.PayAddCertFilePath()` 添加退款证书](#添加退款证书)
-* [`client.PayRefund()` 退款](#退款)
-* [`client.PayOrderSearch()` 订单查询](#订单查询)
+* [`client.PayParseNotifyToBodyMap()` 微信异步通知参数处理](#微信异步通知参数处理)
+* [`client.PayVerifySign()` 微信验证签名](#微信验证签名)
+* [`client.PayAddCertFilePath()` 微信添加退款证书](#微信添加退款证书)
+* [`client.PayRefund()` 微信退款](#微信退款)
+* [`client.PayOrderSearch()` 微信订单查询](#微信订单查询)
 
 ### 使用方法
 
 #### 微信下单
 
->使用方法，参考spg-go-pkg/service/wechat/message/pay_unified_order_test.go
+>使用方法，参考spg-go-pkg/service/wechat/pay/pay_unified_order_test.go
 
 >文档地址：https://pay.weixin.qq.com/wiki/doc/api/wxpay_v2/open/chapter3_1.shtml
 
@@ -46,7 +46,7 @@ order, err := client.PayUnifiedOrder(pm)
 
 #### 微信签名生成
 
->使用方法，参考spg-go-pkg/service/wechat/message/pay_sign_test.go
+>使用方法，参考spg-go-pkg/service/wechat/pay/pay_sign_test.go
 
 >文档地址：https://pay.weixin.qq.com/wiki/doc/api/wxa/wxa_api.php?chapter=7_7&index=3
 
@@ -57,10 +57,83 @@ timeStamp := ""
 client.PaySign(nonce, packages, wechat.TradeTypeApp, timeStamp)
 ````
 
-#### 异步通知参数处理
+#### 微信异步通知参数处理
 
+>使用方法，参考spg-go-pkg/service/wechat/pay/pay_notify_bodymap_test.go
 
-#### 验证签名
-#### 添加退款证书
-#### 退款
-#### 订单查询
+````
+//ctx: *gin.Context
+notifyReq, err := client.PayParseNotifyToBodyMap(ctx.Request)
+````
+
+#### 微信验证签名
+
+>使用方法，参考spg-go-pkg/service/wechat/pay/pay_verify_sign_test.go
+
+````
+//ctx: *gin.Context
+notifyReq, err := client.PayParseNotifyToBodyMap(ctx.Request)
+sign, err := client.PayVerifySign(wechat.SignTypeMD5, notifyReq)
+````
+
+#### 微信添加退款证书
+
+>使用方法，参考spg-go-pkg/service/wechat/pay/pay_add_cert_file_test.go
+
+````
+certFilePath := ""
+keyFilePath := ""
+err := client.PayAddCertFilePath(certFilePath, keyFilePath)
+````
+
+#### 微信退款
+
+>使用方法，参考spg-go-pkg/service/wechat/pay/pay_refund_test.go
+
+>文档地址: https://pay.weixin.qq.com/wiki/doc/api/wxpay_v2/open/chapter3_4.shtml
+
+>注意: 微信支付调用退款需要添加退款证书
+
+````
+err := client.PayAddCertFilePath("", "")
+if err != nil {
+	return
+}
+pm := make(spg_go_pkg.ParamMap)
+pm.Set("appid", appId)
+pm.Set("mch_id", mchId)
+pm.Set("out_trade_no", "SASASASASAS")
+pm.Set("out_refund_no", "sdaa")
+pm.Set("total_fee", 1)
+pm.Set("refund_fee", 1)
+refund, resMap, err := client.PayRefund(pm)
+````
+
+#### 微信订单查询
+
+>使用方法，参考spg-go-pkg/service/wechat/pay/pay_refund_test.go
+
+>文档地址：https://pay.weixin.qq.com/wiki/doc/api/wxpay_v2/open/chapter3_2.shtml
+
+````
+pm := make(spg_go_pkg.ParamMap)
+pm.Set("appid", appId)
+pm.Set("mch_id", mchId)
+pm.Set("transaction_id", "SASASASASAS")
+pm.Set("nonce_str", "sadafaf")
+search, resMap, err := client.PayOrderSearch(pm)
+````
+
+### 其他
+
+#### 回调接口处理方法
+
+>使用gin框架
+
+````
+func Callback(ctx *gin.Context) {
+//回复微信的数据
+rsp := new(spg_go_pkg.NotifyResponse)
+
+}
+````
