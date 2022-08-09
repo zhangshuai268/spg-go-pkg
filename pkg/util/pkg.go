@@ -1,21 +1,21 @@
 package util
 
 import (
-	"bytes"
+	"crypto/md5"
+	"encoding/hex"
 	"encoding/json"
-	"io/ioutil"
-	"net/http"
+	"math/rand"
 	"reflect"
+	"time"
 )
 
-/**
- * 可用于 结构体转map，map转结构体，json转结构体，结构体数据转移
- * @author zhangshuai
- * @description //TODO
- * @date 15:17 2021/4/13
- * @param
- * @return
- **/
+const (
+	UpChar  = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	LowChar = "abcdefghijklmnopqrstuvwxyz"
+	NumChar = "0123456789"
+)
+
+// StructTo 可用于结构体转map，map转结构体，json转结构体，结构体数据转移
 func StructTo(old interface{}, new interface{}) error {
 	tp := reflect.TypeOf(old)
 	var bt []byte
@@ -35,46 +35,26 @@ func StructTo(old interface{}, new interface{}) error {
 	return nil
 }
 
-/**
- * Get请求
- * @author zhangshuai
- * @description //TODO
- * @date 15:17 2021/4/13
- * @param
- * @return
- */
-func HttpGet(url string) (map[string]interface{}, error) {
-	var data map[string]interface{}
-	res, err := http.Get(url)
-	if err != nil {
-		return nil, err
+// GetRandNum 获取随机字符串
+//  n: 生成字符串的位数
+//  char: 包含的字符类型，可自定义，可填写多个，自带：UpChar：全部大写字母、LowChar全部小写字母、NumChar 数字字符
+func GetRandNum(n int, char ...string) string {
+	str := ""
+	for _, s := range char {
+		str += s
 	}
-	body, err := ioutil.ReadAll(res.Body)
-	err = json.Unmarshal(body, &data)
-	if err != nil {
-		return nil, err
+	by := []byte(str)
+	result := make([]byte, 0)
+	r := rand.New(rand.NewSource(time.Now().UnixNano()))
+	for i := 0; i < n; i++ {
+		result = append(result, by[r.Intn(len(by))])
 	}
-	return data, nil
+	return string(result)
 }
 
-/**
- * post请求通过json
- * @author zhangshuai
- * @description //TODO
- * @date 10:26 2021/4/19
- * @param
- * @return
- **/
-func HttpPostJson(url string, post []byte) (map[string]interface{}, error) {
-	var data map[string]interface{}
-	res, err := http.Post(url, "application/json", bytes.NewReader(post))
-	if err != nil {
-		return nil, err
-	}
-	body, err := ioutil.ReadAll(res.Body)
-	err = json.Unmarshal(body, &data)
-	if err != nil {
-		return nil, err
-	}
-	return data, nil
+// Md5Make MD5加密
+func Md5Make(s string) string {
+	md5 := md5.New()
+	md5.Write([]byte(s))
+	return hex.EncodeToString(md5.Sum(nil))
 }

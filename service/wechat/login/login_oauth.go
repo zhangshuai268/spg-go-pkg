@@ -1,6 +1,7 @@
 package wechat
 
 import (
+	"github.com/zhangshuai268/spg-go-pkg/pkg/http"
 	"github.com/zhangshuai268/spg-go-pkg/pkg/util"
 )
 
@@ -18,7 +19,7 @@ type OauthResponse struct {
 func (l *login) Oauth(code string) (*OauthResponse, error) {
 	//请求链接
 	url := oauthUrl + "appid=" + l.AppId + "&secret=" + l.AppSecret + "&code=" + code + "&grant_type=" + l.GrantType
-	wxData, err := util.HttpGet(url)
+	wxData, err := http.HttpGet(url)
 	if err != nil {
 		return nil, err
 	}

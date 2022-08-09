@@ -1,6 +1,9 @@
 package wechat
 
-import "github.com/zhangshuai268/spg-go-pkg/pkg/util"
+import (
+	"github.com/zhangshuai268/spg-go-pkg/pkg/http"
+	"github.com/zhangshuai268/spg-go-pkg/pkg/util"
+)
 
 type AccessTokenResponse struct {
 	AccessToken string `json:"access_token"`
@@ -11,7 +14,7 @@ type AccessTokenResponse struct {
 
 func (m *message) GetAccessToken() (*AccessTokenResponse, error) {
 	url := tokenUrl + "grant_type=" + grantTypeC + "&appid=" + m.AppId + "&secret=" + m.AppSecret
-	wxData, err := util.HttpGet(url)
+	wxData, err := http.HttpGet(url)
 	if err != nil {
 		return nil, err
 	}

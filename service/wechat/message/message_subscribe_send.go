@@ -3,6 +3,7 @@ package wechat
 import (
 	"encoding/json"
 	spg_go_pkg "github.com/zhangshuai268/spg-go-pkg"
+	"github.com/zhangshuai268/spg-go-pkg/pkg/http"
 	"github.com/zhangshuai268/spg-go-pkg/pkg/util"
 	"github.com/zhangshuai268/spg-go-pkg/service/wechat"
 )
@@ -46,7 +47,7 @@ func doSend(pm spg_go_pkg.ParamMap, accessToken string, sendUrl string) (map[str
 	if err != nil {
 		return nil, err
 	}
-	sendRes, err := util.HttpPostJson(sendUrl, bytes)
+	sendRes, err := http.HttpPostJson(sendUrl, bytes)
 	if err != nil {
 		return nil, err
 	}

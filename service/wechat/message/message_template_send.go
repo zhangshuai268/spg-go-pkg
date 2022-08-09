@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	spg_go_pkg "github.com/zhangshuai268/spg-go-pkg"
+	"github.com/zhangshuai268/spg-go-pkg/pkg/http"
 	"github.com/zhangshuai268/spg-go-pkg/pkg/util"
 	"github.com/zhangshuai268/spg-go-pkg/service/wechat"
 )
@@ -24,7 +25,7 @@ func (m *message) TemplateSend(pm spg_go_pkg.ParamMap, accessToken string) (*Tem
 	if err != nil {
 		return nil, err
 	}
-	sendRes, err := util.HttpPostJson(url, bytes)
+	sendRes, err := http.HttpPostJson(url, bytes)
 	if err != nil {
 		return nil, err
 	}
