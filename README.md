@@ -133,7 +133,7 @@ func main() {
 
 ### 三、工具包
 
-#### 1.log包
+#### 1.logger包
 #### 2.iarray包
 #### 3.format包
 #### 4.myTime包
