@@ -1,7 +1,7 @@
 package xorm
 
 import (
-	logger "github.com/zhangshuai268/spg-go-pkg/pkg/log"
+	logger "github.com/zhangshuai268/spg-go-pkg/pkg/logger"
 	"testing"
 )
 

@@ -22,7 +22,7 @@ func (l *MyTime) UnmarshalJSON(b []byte) error {
 }
 
 // StringToMyTime 字符串转MyTime
-// timeS: 日期字符串，格式: YYYY-MM-DD hh:mm:ss或YYYY-MM-DD
+//  timeS: 日期字符串，格式: YYYY-MM-DD hh:mm:ss或YYYY-MM-DD
 func StringToMyTime(timeS string) (MyTime, error) {
 	location, err := time.ParseInLocation("2006-01-02 15:04:05", timeS, time.Local)
 	if err != nil {

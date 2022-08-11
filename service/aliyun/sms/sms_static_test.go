@@ -1,7 +1,7 @@
 package aliyun
 
 import (
-	logger "github.com/zhangshuai268/spg-go-pkg/pkg/log"
+	logger "github.com/zhangshuai268/spg-go-pkg/pkg/logger"
 	"github.com/zhangshuai268/spg-go-pkg/service/aliyun"
 	"testing"
 )

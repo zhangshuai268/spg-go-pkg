@@ -21,7 +21,7 @@ type logger struct {
 
 // InitLogger 初始化日志
 //  onFile: 文件记录开关
-//  注意: 若文件记录开关打开则必须存在日志记录文件夹log
+//  注意: 若文件记录开关打开会在项目根目录下生成log文件夹，日记记录在log文件夹中
 func InitLogger(onFile bool) (*logger, error) {
 	dir, _ := os.Getwd()
 	var apiLogger *logrus.Logger
@@ -30,9 +30,25 @@ func InitLogger(onFile bool) (*logger, error) {
 	var panicLogger *logrus.Logger
 	if onFile {
 		//日志记录文件
-		errFile := dir + "/log/error/error.log"
-		panicFile := dir + "/log/panic/panic.log"
-		infoFile := dir + "/log/info/info.log"
+		errDir := dir + "/logger/error"
+		err := os.MkdirAll(errDir, os.ModePerm)
+		if err != nil {
+			return nil, err
+		}
+		panicDir := dir + "/logger/panic"
+		err = os.MkdirAll(panicDir, os.ModePerm)
+		if err != nil {
+			return nil, err
+		}
+		infoDir := dir + "/logger/info"
+		err = os.MkdirAll(infoDir, os.ModePerm)
+		if err != nil {
+			return nil, err
+		}
+
+		errFile := dir + "/logger/error/error.logger"
+		panicFile := dir + "/logger/panic/panic.logger"
+		infoFile := dir + "/logger/info/info.logger"
 		errSrc, err := os.OpenFile(errFile, os.O_APPEND|os.O_WRONLY|os.O_CREATE, os.ModePerm)
 		if err != nil {
 			return nil, err
@@ -91,8 +107,8 @@ func (logger *logger) SetApiFile(reqUri string) error {
 		reqUri = reqUri[:index]
 	}
 	paths := strings.Split(reqUri, "/")
-	fileName := logFilePath + "/log/api"
-	dir := logFilePath + "/log/api"
+	fileName := logFilePath + "/logger/api"
+	dir := logFilePath + "/logger/api"
 	for index, path := range paths {
 		fileName += "/" + path
 		if index == len(paths)-1 {

@@ -2,7 +2,7 @@ package wechat
 
 import (
 	spg_go_pkg "github.com/zhangshuai268/spg-go-pkg"
-	logger "github.com/zhangshuai268/spg-go-pkg/pkg/log"
+	logger "github.com/zhangshuai268/spg-go-pkg/pkg/logger"
 	"testing"
 )
 

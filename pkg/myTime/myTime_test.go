@@ -1,7 +1,7 @@
-package mongo
+package myTime
 
 import (
-	logger "github.com/zhangshuai268/spg-go-pkg/pkg/logger"
+	"github.com/zhangshuai268/spg-go-pkg/pkg/logger"
 	"os"
 	"testing"
 )
@@ -14,10 +14,11 @@ func TestMain(m *testing.M) {
 	os.Exit(m.Run())
 }
 
-func TestInitMongoEngin(t *testing.T) {
-	_, err := InitMongoEngin("", "")
+func TestStringToMyTime(t *testing.T) {
+	s := "2007-12-11 12:32:33"
+	time, err := StringToMyTime(s)
 	if err != nil {
 		logger.Logger.Error(err.Error())
-		return
 	}
+	logger.Logger.Info(time)
 }
